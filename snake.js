@@ -16,5 +16,5 @@ function iniciar() {
 }
 
 function start() {
-    intervalo = setInterval(moverSnake, velocidad);
+    intervalo = setInterval(moverSnake, velocidadActual);
 }

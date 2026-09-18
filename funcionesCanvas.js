@@ -39,7 +39,6 @@ function moverSnake() {
     let cambio_x = 0;
     let cambio_y = 0;
 
-    limpiarCanva();
     if (direccion == "R") {
         cambio_x = 1;
         cambio_y = 0;
@@ -54,15 +53,18 @@ function moverSnake() {
         cambio_y = 1;
     }
 
+    snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
+    
+    if (!detectarColisionComida()) {
+        snake.pop(); 
+    }
 
     if (detectarColisionSnake()) {
         perder();
-    } else {
-        snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
-        if (!detectarColisionComida()) {
-            snake.pop();
-        }
+        return;
     }
+
+    limpiarCanva();
     dibujarSnake();
     dibujarComida();
 }
@@ -140,17 +142,19 @@ function generarPosicionComida() {
 }
 
 function detectarColisionSnake() {
-    for (i = 3; i < snake.length; i++) {
+    for (let i = 3; i < snake.length; i++) {
         if (snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1]) {
-            msgLose = 1; //msg1: Perder por chocar con si mismo
+            msgLose = 1; // msg1: Perder por chocar con si mismo
             return true;
         }
     }
-    if (snake[0][0] <= 0 || snake[0][0] >= canvas.width - LADO_CUADRADO ||
-        snake[0][1] <= 0 || snake[0][1] >= canvas.height - LADO_CUADRADO) {
-        msgLose = 2; //msg2: Perder por chocar con borde
-        return true
+
+    if (snake[0][0] < 0 || snake[0][0] > canvas.width - LADO_CUADRADO ||
+        snake[0][1] < 0 || snake[0][1] > canvas.height - LADO_CUADRADO) {
+        msgLose = 2; // msg2: Perder por chocar con borde
+        return true;
     }
+    
     return false;
 }
 
