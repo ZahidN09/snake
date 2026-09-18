@@ -5,6 +5,7 @@ const COLOR_SNAKE = "#2cac12";
 const LADO_CUADRADO = 25;
 const POS_INIT_X = Math.floor((canvas.width - LADO_CUADRADO) / 2);
 const POS_INIT_Y = Math.floor((canvas.height - LADO_CUADRADO) / 2);
+const DESPLAZAMIENTO = 10;
 
 let largoSnake = 3;
 let snakeX = 0;
@@ -20,10 +21,17 @@ function dibujarRectangulo(X, Y, ancho, alto, color) {
 }
 
 function dibujarSnake() {
-    snakeX = POS_INIT_X;
-    snakeY = POS_INIT_Y;
+    let x = snakeX;
+    let y = snakeY;
     for (let i = 1; i <= largoSnake; i++) {
-        dibujarRectangulo(snakeX,snakeY,LADO_CUADRADO,LADO_CUADRADO,COLOR_SNAKE);
-        snakeX = snakeX - LADO_CUADRADO;
+        dibujarRectangulo(x,y,LADO_CUADRADO,LADO_CUADRADO,COLOR_SNAKE);
+        x = x - LADO_CUADRADO;
     }
+}
+
+function moverSnake(){
+    snakeX = snakeX + DESPLAZAMIENTO;
+    //snakeY = snakeY + DESPLAZAMIENTO;
+    limpiarCanva();
+    dibujarSnake();
 }
