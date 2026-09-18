@@ -1,3 +1,5 @@
+let velocidad = 200;
+
 function iniciar(){
     snakeX = POS_INIT_X;
     snakeY = POS_INIT_Y;
@@ -5,5 +7,5 @@ function iniciar(){
 }
 
 function start(){
-    moverSnake();
+    intervalo = setInterval(moverSnake, velocidad);
 }

@@ -11,6 +11,8 @@ let largoSnake = 3;
 let snakeX = 0;
 let snakeY = 0;
 
+let direccion = "R";
+
 function limpiarCanva() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -24,14 +26,37 @@ function dibujarSnake() {
     let x = snakeX;
     let y = snakeY;
     for (let i = 1; i <= largoSnake; i++) {
-        dibujarRectangulo(x,y,LADO_CUADRADO,LADO_CUADRADO,COLOR_SNAKE);
+        dibujarRectangulo(x, y, LADO_CUADRADO, LADO_CUADRADO, COLOR_SNAKE);
         x = x - LADO_CUADRADO;
     }
 }
 
-function moverSnake(){
-    snakeX = snakeX + DESPLAZAMIENTO;
-    //snakeY = snakeY + DESPLAZAMIENTO;
+function moverSnake() {
+    if (direccion == "R") {
+        snakeX = snakeX + DESPLAZAMIENTO;
+    } else if (direccion == "L") {
+        snakeX = snakeX - DESPLAZAMIENTO;
+    } else if (direccion == "U") {
+        snakeY = snakeY - DESPLAZAMIENTO;
+    } else if (direccion == "D") {
+        snakeY = snakeY + DESPLAZAMIENTO;
+    }
     limpiarCanva();
     dibujarSnake();
+}
+
+function moverDerecha() {
+    direccion = "R";
+}
+
+function moverIzquierda() {
+    direccion = "L";
+}
+
+function moverArriba() {
+    direccion = "U";
+}
+
+function moverAbajo() {
+    direccion = "D";
 }
