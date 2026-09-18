@@ -227,7 +227,7 @@ function perder() {
     let msg;
     switch (msgLose) {
         case 1:
-            msg = "NO TE COMAS A TI MISMO!!";
+            msg = "NO TE COMAS A TI MISMA!!";
             break;
 
         case 2:
@@ -237,7 +237,7 @@ function perder() {
         default:
             break;
     }
-    alert(msg);
+    alert(msg + "\n\nPuntaje final: " + puntaje + "\n\n (Presiona Iniciar para jugar de nuevo)");
     clearInterval(intervalo);
 }
 

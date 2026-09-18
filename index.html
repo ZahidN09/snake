@@ -1,28 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake</title>
     <link href="snake.css" rel="stylesheet" />
     <script src="snake.js"></script>
     <script src="utilitarios.js"></script>
 </head>
 
 <body onload="iniciar()">
-    <div class="contenedor">
-        <canvas id="areaJuego" width="500" height="500"></canvas>
+    <div class="main-layout">
+        
+        <!-- SECCIÓN IZQUIERDA/SUPERIOR: Área de Juego -->
+        <div class="game-section">
+            <div class="header">
+                <h1>SNAKE</h1>
+                <div class="score-board">
+                    <label>Puntaje: </label>
+                    <span id="txtPuntaje">0</span>
+                </div>
+            </div>
+
+            <div class="contenedor">
+                <canvas id="areaJuego" width="500" height="500"></canvas>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DERECHA/INFERIOR: Controles -->
+        <div class="controls-section">
+            
+            <!-- Botón estático al lateral -->
+            <button class="botonControl btn-start" onclick="start()">INICIAR</button>
+            
+            <!-- Controles tipo teclado estándar -->
+            <div class="d-pad-keyboard">
+                <button class="botonControl up" onclick="moverArriba()">▲</button>
+                <button class="botonControl left" onclick="moverIzquierda()">◄</button>
+                <button class="botonControl down" onclick="moverAbajo()">▼</button>
+                <button class="botonControl right" onclick="moverDerecha()">►</button>
+            </div>
+
+        </div>
+
     </div>
-    <div>
-        <button class="botonControl" onclick="moverArriba()">Arriba</button>
-        <button class="botonControl" onclick="moverAbajo()">Abajo</button>
-        <button class="botonControl" onclick="moverDerecha()">Derecha</button>
-        <button class="botonControl" onclick="moverIzquierda()">Izquierda</button>
-    </div>
-    <div>
-        <button class="botonControl" onclick="start()">Iniciar</button>
-    </div>
-    <div>
-        <label>Puntaje: </label><span id="txtPuntaje">0</span>
-    </div>
+    
     <script src="funcionesCanvas.js"></script>
 </body>
 

@@ -1,0 +1,5 @@
+Eres un experto diseñador gráfico y programador Web. Necesito estrictamente que hagas mi página responsive para PC, móvil y tablets. Solo puedes usar HTML y CSS, ninguna otra librería. Genera el código HTML y el código en CSS en una sola respuesta pero por separado. Usa tu conocimiento como diseñador para darle un aspecto retro y arcade estilo Nokia. Puedes cambiar y mejorar la distribución de botones y componentes, añadir texto y demás, pero no toques ni modifiques lo Ids, componentes, links o archivos referenciados.
+
+El diseño he idea está bien, pero los tamaños no permiten una buena experiencia ni en celular ni en PC, si bien la página es responsive no se puede ver los controloes, puntajes ni área de juego de manera adecuada.
+
+
