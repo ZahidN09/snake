@@ -18,6 +18,7 @@ let comidaX = POS_COMIDA_X;
 let comidaY = POS_COMIDA_Y;
 
 let puntaje = 0;
+let msgLose = 0;
 
 function limpiarCanva() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -53,14 +54,14 @@ function moverSnake() {
         cambio_y = 1;
     }
 
-    snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
-    
-    if(!detectarColisionComida()){
-        snake.pop();
-    }
 
-    if(detectarColisionSnake()){
-        alert("PERDISTE");
+    if (detectarColisionSnake()) {
+        perder();
+    } else {
+        snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
+        if (!detectarColisionComida()) {
+            snake.pop();
+        }
     }
     dibujarSnake();
     dibujarComida();
@@ -136,27 +137,52 @@ function generarPosicionComida() {
     }
 }
 
-function detectarColisionSnake(){
-    for(i=3;i<snake.length;i++){
-        if(snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1]){
+function detectarColisionSnake() {
+    for (i = 3; i < snake.length; i++) {
+        if (snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1]) {
+            msgLose = 1; //msg1: Perder por chocar con si mismo
             return true;
         }
+    }
+    if(snake[0][0] <= 0 || snake[0][0] >= canvas.width - LADO_CUADRADO||
+        snake[0][1] <= 0 || snake[0][1] >= canvas.height - LADO_CUADRADO){
+            msgLose = 2; //msg2: Perder por chocar con borde
+            return true
     }
     return false;
 }
 
-document.addEventListener("keydown", function(evento) {
-    let tecla = evento.key; 
+function perder() {
+    let msg;
+    switch (msgLose) {
+    case 1:
+        msg = "NO TE COMAS A TI MISMO!!";
+        break; 
+        
+    case 2:
+        msg = "NO TRATES DE ESCAPAR!!";
+        break;
+        
+    default:
+        break;
+}
+    alert(msg);
+    clearInterval(intervalo);
+}
+
+// Entradas de teclado
+document.addEventListener("keydown", function (evento) {
+    let tecla = evento.key;
 
     if (tecla === "ArrowRight" && direccion !== "L") {
         direccion = "R";
-    } 
+    }
     else if (tecla === "ArrowLeft" && direccion !== "R") {
         direccion = "L";
-    } 
+    }
     else if (tecla === "ArrowUp" && direccion !== "D") {
         direccion = "U";
-    } 
+    }
     else if (tecla === "ArrowDown" && direccion !== "U") {
         direccion = "D";
     }
