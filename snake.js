@@ -3,7 +3,7 @@ let snake = [];
 let snakeX = 0;
 let snakeY = 0;
 
-let velocidad = 500;
+let velocidadActual = 500;
 
 function iniciar() {
     snakeX = POS_INIT_X;

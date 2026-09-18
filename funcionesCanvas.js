@@ -110,7 +110,9 @@ function detectarColisionComida() {
     if (snake[0][0] == comidaX && snake[0][1] == comidaY) {
         generarPosicionComida();
         puntaje = puntaje + 1;
+        mostarEnSpan("txtPuntaje", puntaje);
         largoSnake = largoSnake + 1;
+        aumentarVelocidad();
         return true;
     }
     return false;
@@ -144,28 +146,50 @@ function detectarColisionSnake() {
             return true;
         }
     }
-    if(snake[0][0] <= 0 || snake[0][0] >= canvas.width - LADO_CUADRADO||
-        snake[0][1] <= 0 || snake[0][1] >= canvas.height - LADO_CUADRADO){
-            msgLose = 2; //msg2: Perder por chocar con borde
-            return true
+    if (snake[0][0] <= 0 || snake[0][0] >= canvas.width - LADO_CUADRADO ||
+        snake[0][1] <= 0 || snake[0][1] >= canvas.height - LADO_CUADRADO) {
+        msgLose = 2; //msg2: Perder por chocar con borde
+        return true
     }
     return false;
+}
+
+function aumentarVelocidad() {
+    let nuevaVelocidad = 500;
+    if (puntaje < 6) {
+        nuevaVelocidad = 500;
+    } else if (puntaje < 16) {
+        nuevaVelocidad = 400;
+    } else if (puntaje < 31) {
+        nuevaVelocidad = 300;
+    } else if (puntaje < 51) {
+        nuevaVelocidad = 200;
+    } else if (puntaje < 76) {
+        nuevaVelocidad = 140;
+    } else {
+        nuevaVelocidad = 100;
+    }
+    if (nuevaVelocidad !== velocidadActual) {
+        velocidadActual = nuevaVelocidad;
+        clearInterval(intervalo);
+        intervalo = setInterval(moverSnake, velocidadActual);
+    }
 }
 
 function perder() {
     let msg;
     switch (msgLose) {
-    case 1:
-        msg = "NO TE COMAS A TI MISMO!!";
-        break; 
-        
-    case 2:
-        msg = "NO TRATES DE ESCAPAR!!";
-        break;
-        
-    default:
-        break;
-}
+        case 1:
+            msg = "NO TE COMAS A TI MISMO!!";
+            break;
+
+        case 2:
+            msg = "NO TRATES DE ESCAPAR!!";
+            break;
+
+        default:
+            break;
+    }
     alert(msg);
     clearInterval(intervalo);
 }
