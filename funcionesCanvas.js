@@ -2,10 +2,13 @@ let canvas = document.getElementById("areaJuego");
 let ctx = canvas.getContext("2d");
 
 const COLOR_SNAKE = "#2cac12";
+const COLOR_COMIDA = "#b30000";
 const LADO_CUADRADO = 25;
 const POS_INIT_X = Math.floor((canvas.width - LADO_CUADRADO) / 2);
 const POS_INIT_Y = Math.floor((canvas.height - LADO_CUADRADO) / 2);
 const DESPLAZAMIENTO = 25;
+const POS_COMIDA_X = POS_INIT_X + 150;
+const POS_COMIDA_Y = POS_INIT_Y;
 
 let direccion = "R";
 let direccion_new = "R";
@@ -47,6 +50,7 @@ function moverSnake() {
 
     snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
     snake.pop();
+    dibujarComida();
     dibujarSnake();
 }
 
@@ -83,4 +87,10 @@ function validarCambioDireccion() {
         direccion = direccion_new;
         direccion_old = direccion_new;
     }
+}
+
+function dibujarComida(){
+    let comidaX = POS_COMIDA_X;
+    let comidaY = POS_COMIDA_Y;
+    dibujarRectangulo(comidaX, comidaY, LADO_CUADRADO, LADO_CUADRADO, COLOR_COMIDA);
 }

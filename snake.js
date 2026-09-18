@@ -12,6 +12,7 @@ function iniciar() {
         snake[i] = [snakeX - (i * LADO_CUADRADO), snakeY];
     }
     dibujarSnake();
+    dibujarComida();
 }
 
 function start() {
