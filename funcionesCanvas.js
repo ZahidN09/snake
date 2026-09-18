@@ -58,7 +58,11 @@ function moverSnake() {
     if(!detectarColisionComida()){
         snake.pop();
     }
-    detectarColisionSnake();
+
+    if(detectarColisionSnake()){
+        alert("PERDISTE");
+    }
+    dibujarSnake();
     dibujarComida();
 }
 
@@ -130,6 +134,15 @@ function generarPosicionComida() {
             }
         }
     }
+}
+
+function detectarColisionSnake(){
+    for(i=3;i<snake.length;i++){
+        if(snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1]){
+            return true;
+        }
+    }
+    return false;
 }
 
 document.addEventListener("keydown", function(evento) {
