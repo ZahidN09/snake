@@ -73,37 +73,26 @@ function moverSnake() {
 }
 
 function moverDerecha() {
-    direccion_new = "R";
-    validarCambioDireccion();
+    if (direccion !== "L") {
+        siguienteDireccion = "R";
+    }
 }
 
 function moverIzquierda() {
-    direccion_new = "L";
-    validarCambioDireccion();
+    if (direccion !== "R") {
+        siguienteDireccion = "L";
+    }
 }
 
 function moverArriba() {
-    direccion_new = "U";
-    validarCambioDireccion();
+    if (direccion !== "D") {
+        siguienteDireccion = "U";
+    }
 }
 
 function moverAbajo() {
-    direccion_new = "D";
-    validarCambioDireccion();
-}
-
-function validarCambioDireccion() {
-    if ((direccion_new == "R") && (direccion_old == "L")) {
-        direccion = "L";
-    } else if ((direccion_new == "L") && (direccion_old == "R")) {
-        direccion = "R";
-    } else if ((direccion_new == "U") && (direccion_old == "D")) {
-        direccion = "D";
-    } else if ((direccion_new == "D") && (direccion_old == "U")) {
-        direccion = "U";
-    } else {
-        direccion = direccion_new;
-        direccion_old = direccion_new;
+    if (direccion !== "U") {
+        siguienteDireccion = "D";
     }
 }
 
