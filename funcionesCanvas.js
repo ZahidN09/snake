@@ -17,6 +17,8 @@ let direccion_old = "R";
 let comidaX = POS_COMIDA_X;
 let comidaY = POS_COMIDA_Y;
 
+let puntaje = 0;
+
 function limpiarCanva() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -27,8 +29,8 @@ function dibujarRectangulo(X, Y, ancho, alto, color) {
 }
 
 function dibujarSnake() {
-    for (let i = 1; i <= snake.length; i++) {
-        dibujarRectangulo(snake[i - 1][0], snake[i - 1][1], LADO_CUADRADO, LADO_CUADRADO, COLOR_SNAKE);
+    for (let i = 0; i < snake.length; i++) {
+        dibujarRectangulo(snake[i][0], snake[i][1], LADO_CUADRADO, LADO_CUADRADO, COLOR_SNAKE);
     }
 }
 
@@ -52,9 +54,14 @@ function moverSnake() {
     }
 
     snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
-    snake.pop();
+    
+    if(!detectarColision()){
+        snake.pop();
+    }else{
+        console.log(snake.length);
+    }
+
     dibujarSnake();
-    detectarColision();
     dibujarComida();
 }
 
@@ -100,7 +107,11 @@ function dibujarComida() {
 function detectarColision() {
     if (snake[0][0] == comidaX && snake[0][1] == comidaY) {
         generarPosicionComida();
+        puntaje = puntaje + 1;
+        largoSnake = largoSnake + 1;
+        return true;
     }
+    return false;
 }
 
 function generarAleatorio(min, max) {
@@ -110,10 +121,10 @@ function generarAleatorio(min, max) {
 function generarPosicionComida() {
     let posicionSegura = false;
     while (posicionSegura === false) {
-        
+
         comidaX = LADO_CUADRADO * generarAleatorio(0, canvas.width / LADO_CUADRADO);
         comidaY = LADO_CUADRADO * generarAleatorio(0, canvas.height / LADO_CUADRADO);
-        
+
         posicionSegura = true;
         for (let i = 0; i < snake.length; i++) {
             if (snake[i][0] === comidaX && snake[i][1] === comidaY) {
