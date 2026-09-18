@@ -1,17 +1,17 @@
-let largoSnake = 3;
+let largoSnake = 4;
 let snake = [];
 let snakeX = 0;
 let snakeY = 0;
 
-let velocidadActual = 500;
+let velocidadActual = 400;
 let flag = 0;
 
 function iniciar() {
-    puntaje = 0
+    puntaje = 0;
     mostarEnSpan("txtPuntaje", puntaje);
-    largoSnake = 3;
+    largoSnake = 4;
     snake = [];
-    velocidadActual = 500;
+    velocidadActual = 400;
     snakeX = POS_INIT_X;
     snakeY = POS_INIT_Y;
     comidaX = POS_COMIDA_X;
