@@ -37,9 +37,9 @@ function dibujarSnake() {
     let color = COLOR_SNAKE_1;
     dibujarCabeza(snake[0][0], snake[0][1]);
     for (let i = 1; i < snake.length; i++) {
-        if(i%2 == 0){
-            color = COLOR_SNAKE_1;  
-        }else{
+        if (i % 2 == 0) {
+            color = COLOR_SNAKE_1;
+        } else {
             color = COLOR_SNAKE_2;
         }
         dibujarRectangulo(snake[i][0], snake[i][1], LADO_CUADRADO, LADO_CUADRADO, color);

@@ -25,11 +25,13 @@ function iniciar() {
 
 function start() {
     flag = flag + 1;
-    if(flag > 1){
+    if (flag > 1) {
         clearInterval(intervalo);
         flag = 1;
     }
     limpiarCanva();
     iniciar();
+    direccion = "R";
+    siguienteDireccion = "R";
     intervalo = setInterval(moverSnake, velocidadActual);
 }
