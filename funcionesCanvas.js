@@ -55,13 +55,10 @@ function moverSnake() {
 
     snake.unshift([snake[0][0] + cambio_x * DESPLAZAMIENTO, snake[0][1] + cambio_y * DESPLAZAMIENTO]);
     
-    if(!detectarColision()){
+    if(!detectarColisionComida()){
         snake.pop();
-    }else{
-        console.log(snake.length);
     }
-
-    dibujarSnake();
+    detectarColisionSnake();
     dibujarComida();
 }
 
@@ -104,7 +101,7 @@ function dibujarComida() {
     dibujarRectangulo(comidaX, comidaY, LADO_CUADRADO, LADO_CUADRADO, COLOR_COMIDA);
 }
 
-function detectarColision() {
+function detectarColisionComida() {
     if (snake[0][0] == comidaX && snake[0][1] == comidaY) {
         generarPosicionComida();
         puntaje = puntaje + 1;
@@ -134,3 +131,20 @@ function generarPosicionComida() {
         }
     }
 }
+
+document.addEventListener("keydown", function(evento) {
+    let tecla = evento.key; 
+
+    if (tecla === "ArrowRight" && direccion !== "L") {
+        direccion = "R";
+    } 
+    else if (tecla === "ArrowLeft" && direccion !== "R") {
+        direccion = "L";
+    } 
+    else if (tecla === "ArrowUp" && direccion !== "D") {
+        direccion = "U";
+    } 
+    else if (tecla === "ArrowDown" && direccion !== "U") {
+        direccion = "D";
+    }
+});
