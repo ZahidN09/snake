@@ -99,13 +99,27 @@ function dibujarComida() {
 
 function detectarColision() {
     if (snake[0][0] == comidaX && snake[0][1] == comidaY) {
-        comidaX = LADO_CUADRADO * generarAleatorio(0, canvas.width / LADO_CUADRADO);
-        comidaY = LADO_CUADRADO * generarAleatorio(0, canvas.height / LADO_CUADRADO);
+        generarPosicionComida();
     }
 }
 
 function generarAleatorio(min, max) {
-    let random = Math.random();
-    let numero = Math.ceil(random * (max - min)) + min;
-    return numero - 1;
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function generarPosicionComida() {
+    let posicionSegura = false;
+    while (posicionSegura === false) {
+        
+        comidaX = LADO_CUADRADO * generarAleatorio(0, canvas.width / LADO_CUADRADO);
+        comidaY = LADO_CUADRADO * generarAleatorio(0, canvas.height / LADO_CUADRADO);
+        
+        posicionSegura = true;
+        for (let i = 0; i < snake.length; i++) {
+            if (snake[i][0] === comidaX && snake[i][1] === comidaY) {
+                posicionSegura = false;
+                break;
+            }
+        }
+    }
 }
