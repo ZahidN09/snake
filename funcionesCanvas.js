@@ -11,14 +11,15 @@ const POS_COMIDA_X = POS_INIT_X + 150;
 const POS_COMIDA_Y = POS_INIT_Y;
 
 let direccion = "R";
-let direccion_new = "R";
-let direccion_old = "R";
+let siguienteDireccion = "R";
 
 let comidaX = POS_COMIDA_X;
 let comidaY = POS_COMIDA_Y;
 
 let puntaje = 0;
 let msgLose = 0;
+
+
 
 function limpiarCanva() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -36,6 +37,8 @@ function dibujarSnake() {
 }
 
 function moverSnake() {
+    direccion = siguienteDireccion;
+
     let cambio_x = 0;
     let cambio_y = 0;
 
@@ -202,16 +205,17 @@ function perder() {
 document.addEventListener("keydown", function (evento) {
     let tecla = evento.key;
 
+    // Evaluamos contra 'direccion' (la realidad física en el canvas)
     if (tecla === "ArrowRight" && direccion !== "L") {
-        direccion = "R";
+        siguienteDireccion = "R";
     }
     else if (tecla === "ArrowLeft" && direccion !== "R") {
-        direccion = "L";
+        siguienteDireccion = "L";
     }
     else if (tecla === "ArrowUp" && direccion !== "D") {
-        direccion = "U";
+        siguienteDireccion = "U";
     }
     else if (tecla === "ArrowDown" && direccion !== "U") {
-        direccion = "D";
+        siguienteDireccion = "D";
     }
 });
